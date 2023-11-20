@@ -3,7 +3,13 @@ import { useEffect } from "react";
 import * as BookAPI from "../BooksAPI";
 import BookShelf from "./BookShelf";
 
-const BooksShelves = ({ books, setBooks, shelfNames, onUpdateBookShelf }) => {
+const BooksShelves = ({
+  books,
+  setBooks,
+  shelfNames,
+  bookStatusOptions,
+  onUpdateBookShelf,
+}) => {
   console.log(books);
 
   const onBookStatusChange = (book, status) => {
@@ -29,30 +35,7 @@ const BooksShelves = ({ books, setBooks, shelfNames, onUpdateBookShelf }) => {
   const currentlyReadingBooks = shelves["currentlyReading"];
   const wantToReadBooks = shelves["wantToRead"];
   const readBooks = shelves["read"];
-  const bookStatusOptions = (shelf) => {
-    return [
-      { value: "", name: "Move to...", disabled: true, selected: false },
-      {
-        value: "currentlyReading",
-        name: "Currently Reading",
-        disabled: false,
-        selected: shelf === "currentlyReading",
-      },
-      {
-        value: "wantToRead",
-        name: "Want To Read",
-        disabled: false,
-        selected: shelf === "wantToRead",
-      },
-      {
-        value: "read",
-        name: "Read",
-        disabled: false,
-        selected: shelf === "read",
-      },
-      { value: "none", name: "None", disabled: false, selected: false },
-    ];
-  };
+
   return (
     <div className="list-books">
       <div className="list-books-title">

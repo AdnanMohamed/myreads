@@ -7,10 +7,37 @@ import * as BookAPI from "./BooksAPI";
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [searchedBooks, setSearchedBooks] = useState([]);
 
   // Return the book that has the give id, or null if no match.
   const findBook = (id) => {
     return books.find((b) => b.id === id);
+  };
+
+  const bookStatusOptions = (shelf) => {
+    console.log(`bookStatusOptions: shelf=${shelf}`);
+    return [
+      { value: "", name: "Move to...", disabled: true, selected: false },
+      {
+        value: "currentlyReading",
+        name: "Currently Reading",
+        disabled: false,
+        selected: shelf === "currentlyReading",
+      },
+      {
+        value: "wantToRead",
+        name: "Want To Read",
+        disabled: false,
+        selected: shelf === "wantToRead",
+      },
+      {
+        value: "read",
+        name: "Read",
+        disabled: false,
+        selected: shelf === "read",
+      },
+      { value: "none", name: "None", disabled: false, selected: false },
+    ];
   };
 
   const updateBookShelf = (bookId, shelf) => {
@@ -71,11 +98,21 @@ function App() {
             books={books}
             setBooks={setBooks}
             shelfNames={shelfNames}
+            bookStatusOptions={bookStatusOptions}
             onUpdateBookShelf={updateBookShelf}
           />
         }
       />
-      <Route path="/search" element={<SearchPage />} />
+      <Route
+        path="/search"
+        element={
+          <SearchPage
+            books={books}
+            bookStatusOptions={bookStatusOptions}
+            onUpdateBookShelf={updateBookShelf}
+          />
+        }
+      />
     </Routes>
   );
 }
