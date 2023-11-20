@@ -175,3 +175,13 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+
+.star-filled,
+.star-empty {
+  color: gold;
+  font-size: 1rem;
+}
+
+.star-empty {
+  color: lightgray;
+}
