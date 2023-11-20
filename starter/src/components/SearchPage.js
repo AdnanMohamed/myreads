@@ -5,7 +5,11 @@ const SearchPage = ({ books, bookStatusOptions, onUpdateBookShelf }) => {
   const [searchedBooks, setSearchedBooks] = useState([]);
 
   const filterBooks = (searchString) => {
-    return books.filter((b) => Math.random() < 0.5);
+    const titleMatch = (title, str) => {
+      return title.toUpperCase().includes(str.toUpperCase());
+    };
+    const cleanStr = searchString.trim().toUpperCase();
+    return books.filter((b) => titleMatch(b.title, cleanStr));
   };
 
   const onSearch = (searchString) => {
