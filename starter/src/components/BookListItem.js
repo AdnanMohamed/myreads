@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import BookShelfChanger from "./BookShelfChanger";
 
 const BookListItem = ({ book, shelfOptions, onShelfChange }) => {
+  console.log(`BookListItem: onShelfChange=${onShelfChange}`);
   // Function to render stars based on the rating
   const renderRating = (rating) => {
     let stars = [];
@@ -42,6 +43,14 @@ const BookListItem = ({ book, shelfOptions, onShelfChange }) => {
         {book.averageRating && (
           <div className="book-rating">{renderRating(book.averageRating)}</div>
         )}
+        {/* Additional Information */}
+        <div className="book-info">
+          {book.pageCount && <div>Pages: {book.pageCount}</div>}
+          {book.publishedDate && <div>Published: {book.publishedDate}</div>}
+          {book.categories && (
+            <div>Categories: {book.categories.join(", ")}</div>
+          )}
+        </div>
       </div>
     </li>
   );

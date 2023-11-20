@@ -185,3 +185,8 @@ body,
 .star-empty {
   color: lightgray;
 }
+
+.book-info > div {
+  font-size: 0.8rem;
+  color: #666;
+}

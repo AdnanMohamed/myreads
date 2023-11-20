@@ -5,17 +5,11 @@ import BookShelf from "./BookShelf";
 
 const BooksShelves = ({
   books,
-  setBooks,
   shelfNames,
   bookStatusOptions,
   onUpdateBookShelf,
 }) => {
   console.log(books);
-
-  const onBookStatusChange = (book, status) => {
-    // Implement
-    return;
-  };
 
   const booksByShelf = (shelfName) => {
     return books.filter((b) => b.shelf === shelfName);
