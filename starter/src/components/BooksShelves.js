@@ -9,8 +9,6 @@ const BooksShelves = ({
   bookStatusOptions,
   onUpdateBookShelf,
 }) => {
-  console.log(books);
-
   const booksByShelf = (shelfName) => {
     return books.filter((b) => b.shelf === shelfName);
   };
@@ -25,7 +23,6 @@ const BooksShelves = ({
     return bookShelves;
   };
   const shelves = groupByShelf(books);
-  console.log(shelves);
   const currentlyReadingBooks = shelves["currentlyReading"];
   const wantToReadBooks = shelves["wantToRead"];
   const readBooks = shelves["read"];

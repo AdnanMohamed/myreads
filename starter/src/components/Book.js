@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import BookShelfChanger from "./BookShelfChanger";
 
-const BookListItem = ({ book, shelfOptions, onShelfChange }) => {
-  console.log(`BookListItem: onShelfChange=${onShelfChange}`);
+const Book = ({ book, shelfOptions, onShelfChange }) => {
   // Function to render stars based on the rating
   const renderRating = (rating) => {
     let stars = [];
@@ -32,7 +31,7 @@ const BookListItem = ({ book, shelfOptions, onShelfChange }) => {
           <BookShelfChanger
             book={book}
             shelfOptions={shelfOptions}
-            onShelfChange={onShelfChange}
+            onShelfChange={(shelf) => onShelfChange(book.id, shelf)}
           />
         </div>
         <div className="book-title">{book.title}</div>
@@ -56,10 +55,10 @@ const BookListItem = ({ book, shelfOptions, onShelfChange }) => {
   );
 };
 
-BookListItem.propTypes = {
+Book.propTypes = {
   book: PropTypes.object.isRequired,
   shelfOptions: PropTypes.array.isRequired,
   onShelfChange: PropTypes.func.isRequired,
 };
 
-export default BookListItem;
+export default Book;

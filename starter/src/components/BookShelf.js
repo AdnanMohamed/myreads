@@ -1,15 +1,15 @@
-import BookListItem from "./BookListItem";
+import BookCollection from "./BookCollection";
 
 const BookShelf = ({ books, shelfTitle, shelfOptions, onBookStatusChange }) => {
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{shelfTitle}</h2>
       <div className="bookshelf-books">
-        <ol className="books-grid">
+        {/* <ol className="books-grid">
           {books.length > 0 ? (
             books.map((book) => {
               return (
-                <BookListItem
+                <Book
                   book={book}
                   shelfOptions={shelfOptions}
                   onShelfChange={(newShelfName) => {
@@ -21,7 +21,12 @@ const BookShelf = ({ books, shelfTitle, shelfOptions, onBookStatusChange }) => {
           ) : (
             <p>This shelf is empty</p>
           )}
-        </ol>
+        </ol> */}
+        <BookCollection
+          books={books}
+          shelfOptions={shelfOptions}
+          onShelfChange={onBookStatusChange}
+        />
       </div>
     </div>
   );

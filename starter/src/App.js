@@ -7,7 +7,6 @@ import * as BookAPI from "./BooksAPI";
 
 function App() {
   const [books, setBooks] = useState([]);
-  const [searchedBooks, setSearchedBooks] = useState([]);
 
   // Return the book that has the give id, or null if no match.
   const findBook = (id) => {
@@ -15,7 +14,6 @@ function App() {
   };
 
   const bookStatusOptions = (shelf) => {
-    console.log(`bookStatusOptions: shelf=${shelf}`);
     return [
       { value: "", name: "Move to...", disabled: true, selected: false },
       {
@@ -36,13 +34,16 @@ function App() {
         disabled: false,
         selected: shelf === "read",
       },
-      { value: "none", name: "None", disabled: false, selected: false },
+      {
+        value: "none",
+        name: "None",
+        disabled: false,
+        selected: shelf === "none",
+      },
     ];
   };
 
   const updateBookShelf = (bookId, shelf) => {
-    console.log(`updateBookShelf: book = ${bookId}`);
-    console.log(`updateBookShelf: shelf = ${shelf}`);
     const updatedBooks = books.map((book) => {
       const newShelf = bookId === book.id ? shelf : book.shelf;
       return { ...book, shelf: newShelf };
