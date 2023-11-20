@@ -3,8 +3,13 @@ import { useEffect } from "react";
 import * as BookAPI from "../BooksAPI";
 import BookShelf from "./BookShelf";
 
-const BooksShelves = ({ books, setBooks, shelfNames }) => {
+const BooksShelves = ({ books, setBooks, shelfNames, onUpdateBookShelf }) => {
   console.log(books);
+
+  const onBookStatusChange = (book, status) => {
+    // Implement
+    return;
+  };
 
   const booksByShelf = (shelfName) => {
     return books.filter((b) => b.shelf === shelfName);
@@ -59,16 +64,19 @@ const BooksShelves = ({ books, setBooks, shelfNames }) => {
             books={currentlyReadingBooks}
             shelfTitle={"Currently Reading"}
             shelfOptions={bookStatusOptions("currentlyReading")}
+            onBookStatusChange={onUpdateBookShelf}
           />
           <BookShelf
             books={wantToReadBooks}
             shelfTitle={"Want To Read"}
             shelfOptions={bookStatusOptions("wantToRead")}
+            onBookStatusChange={onUpdateBookShelf}
           />
           <BookShelf
             books={readBooks}
             shelfTitle={"Read"}
             shelfOptions={bookStatusOptions("read")}
+            onBookStatusChange={onUpdateBookShelf}
           />
         </div>
       </div>

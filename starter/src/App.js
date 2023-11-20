@@ -7,11 +7,56 @@ import * as BookAPI from "./BooksAPI";
 
 function App() {
   const [books, setBooks] = useState([]);
+
+  // Return the book that has the give id, or null if no match.
+  const findBook = (id) => {
+    return books.find((b) => b.id === id);
+  };
+
+  const updateBookShelf = (bookId, shelf) => {
+    console.log(`updateBookShelf: book = ${bookId}`);
+    console.log(`updateBookShelf: shelf = ${shelf}`);
+    const updatedBooks = books.map((book) => {
+      const newShelf = bookId === book.id ? shelf : book.shelf;
+      return { ...book, shelf: newShelf };
+    });
+    setBooks(updatedBooks);
+  };
   const shelfNames = ["currentlyReading", "wantToRead", "read"];
+  const mapBooks = (books) => {
+    return books.map((book) => {
+      const {
+        id,
+        title,
+        subtitle,
+        authors,
+        averageRating,
+        categories,
+        imageLinks,
+        pageCount,
+        publishedDate,
+        shelf,
+      } = book;
+
+      return {
+        id,
+        title,
+        subtitle,
+        authors,
+        averageRating,
+        categories,
+        imageLinks,
+        pageCount,
+        publishedDate,
+        shelf,
+      };
+    });
+  };
   useEffect(() => {
     const fetchBooks = async () => {
       const fetchedBooks = await BookAPI.getAll();
-      setBooks(fetchedBooks);
+      const mappedBooks = mapBooks(fetchedBooks);
+      setBooks(mappedBooks);
     };
 
     fetchBooks();
@@ -26,6 +71,7 @@ function App() {
             books={books}
             setBooks={setBooks}
             shelfNames={shelfNames}
+            onUpdateBookShelf={updateBookShelf}
           />
         }
       />

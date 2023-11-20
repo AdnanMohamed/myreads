@@ -1,4 +1,4 @@
-const BookShelfChanger = ({ shelfOptions }) => {
+const BookShelfChanger = ({ shelfOptions, onChange }) => {
   const createOption = (option) => {
     return (
       <option
@@ -12,7 +12,7 @@ const BookShelfChanger = ({ shelfOptions }) => {
   };
   return (
     <div className="book-shelf-changer">
-      <select>
+      <select onChange={(event) => onChange(event.target.value)}>
         {shelfOptions.map((option) => {
           return createOption(option);
         })}
