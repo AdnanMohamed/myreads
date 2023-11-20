@@ -1,4 +1,4 @@
-import BookShelfChanger from "./BookShelfChanger";
+import BookListItem from "./BookListItem";
 
 const BookShelf = ({ books, shelfTitle, shelfOptions, onBookStatusChange }) => {
   return (
@@ -9,32 +9,17 @@ const BookShelf = ({ books, shelfTitle, shelfOptions, onBookStatusChange }) => {
           {books.length > 0 ? (
             books.map((book) => {
               return (
-                <li key={book.id}>
-                  <div className="book">
-                    <div className="book-top">
-                      <div
-                        className="book-cover"
-                        style={{
-                          width: 128,
-                          height: 188,
-                          backgroundImage: `url("${book.imageLinks.thumbnail}")`,
-                        }}
-                      ></div>
-                      <BookShelfChanger
-                        shelfOptions={shelfOptions}
-                        onChange={(newShelfName) => {
-                          onBookStatusChange(book.id, newShelfName);
-                        }}
-                      />
-                    </div>
-                    <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors[0]}</div>
-                  </div>
-                </li>
+                <BookListItem
+                  book={book}
+                  shelfOptions={shelfOptions}
+                  onShelfChange={(newShelfName) => {
+                    onBookStatusChange(book.id, newShelfName);
+                  }}
+                />
               );
             })
           ) : (
-            <p>Loading books...</p> // Display a loading message or spinner
+            <p>This shelf is empty</p>
           )}
         </ol>
       </div>

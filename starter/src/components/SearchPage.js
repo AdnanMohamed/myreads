@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import BookShelfChanger from "./BookShelfChanger";
+import BookListItem from "./BookListItem";
 import { useState } from "react";
 const SearchPage = ({ books, bookStatusOptions, onUpdateBookShelf }) => {
   const [searchedBooks, setSearchedBooks] = useState([]);
@@ -32,28 +32,13 @@ const SearchPage = ({ books, bookStatusOptions, onUpdateBookShelf }) => {
           {searchedBooks?.map((book) => {
             console.log(book.shelf);
             return (
-              <li key={book.id}>
-                <div className="book">
-                  <div className="book-top">
-                    <div
-                      className="book-cover"
-                      style={{
-                        width: 128,
-                        height: 188,
-                        backgroundImage: `url("${book.imageLinks.thumbnail}")`,
-                      }}
-                    ></div>
-                    <BookShelfChanger
-                      shelfOptions={bookStatusOptions(book.shelf)}
-                      onChange={(newShelfName) => {
-                        onUpdateBookShelf(book.id, newShelfName);
-                      }}
-                    />
-                  </div>
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors[0]}</div>
-                </div>
-              </li>
+              <BookListItem
+                book={book}
+                shelfOptions={bookStatusOptions(book.shelf)}
+                onShelfChange={(newShelfName) => {
+                  onUpdateBookShelf(book.id, newShelfName);
+                }}
+              />
             );
           })}
         </ol>
