@@ -45,14 +45,11 @@ function App() {
   };
 
   const addBook = (book) => {
-    console.log(`addBook: Hi`);
     setBooks([...books, book]);
   };
 
   const removeBook = (book) => {
-    console.log(`removeBook: Hi`);
     const filteredBooks = books.filter((b) => b.id !== book.id);
-    console.log(filteredBooks);
     setBooks(filteredBooks);
   };
 

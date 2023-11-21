@@ -6,7 +6,6 @@ const SearchPage = ({ bookStatusOptions, onShelfChange, getShelf }) => {
   const [searchedBooks, setSearchedBooks] = useState([]);
 
   const addShelfToEach = (books) => {
-    console.log(books);
     return books.map((book) => {
       return {
         ...book,
@@ -16,10 +15,11 @@ const SearchPage = ({ bookStatusOptions, onShelfChange, getShelf }) => {
   };
 
   const onSearch = async (searchString) => {
-    const result = await search(searchString);
-    if (!result.error) setSearchedBooks(addShelfToEach(result));
-    else {
-      setSearchedBooks([]);
+    try {
+      const result = await search(searchString);
+      setSearchedBooks(addShelfToEach(result));
+    } catch (error) {
+      console.error(error);
     }
   };
   return (
