@@ -7,7 +7,7 @@ const BooksShelves = ({
   books,
   shelfNames,
   bookStatusOptions,
-  onUpdateBookShelf,
+  onShelfChange,
 }) => {
   const booksByShelf = (shelfName) => {
     return books.filter((b) => b.shelf === shelfName);
@@ -38,19 +38,19 @@ const BooksShelves = ({
             books={currentlyReadingBooks}
             shelfTitle={"Currently Reading"}
             shelfOptions={bookStatusOptions("currentlyReading")}
-            onBookStatusChange={onUpdateBookShelf}
+            onShelfChange={onShelfChange}
           />
           <BookShelf
             books={wantToReadBooks}
             shelfTitle={"Want To Read"}
             shelfOptions={bookStatusOptions("wantToRead")}
-            onBookStatusChange={onUpdateBookShelf}
+            onShelfChange={onShelfChange}
           />
           <BookShelf
             books={readBooks}
             shelfTitle={"Read"}
             shelfOptions={bookStatusOptions("read")}
-            onBookStatusChange={onUpdateBookShelf}
+            onShelfChange={onShelfChange}
           />
         </div>
       </div>

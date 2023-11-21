@@ -1,6 +1,6 @@
 import BookCollection from "./BookCollection";
 
-const BookShelf = ({ books, shelfTitle, shelfOptions, onBookStatusChange }) => {
+const BookShelf = ({ books, shelfTitle, shelfOptions, onShelfChange }) => {
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{shelfTitle}</h2>
@@ -25,7 +25,7 @@ const BookShelf = ({ books, shelfTitle, shelfOptions, onBookStatusChange }) => {
         <BookCollection
           books={books}
           shelfOptions={shelfOptions}
-          onShelfChange={onBookStatusChange}
+          onShelfChange={onShelfChange}
         />
       </div>
     </div>

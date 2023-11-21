@@ -8,9 +8,10 @@ import * as BookAPI from "./BooksAPI";
 function App() {
   const [books, setBooks] = useState([]);
 
-  // Return the book that has the give id, or null if no match.
-  const findBook = (id) => {
-    return books.find((b) => b.id === id);
+  // Return the value of the shelf for the book with give id
+  const getShelf = (id) => {
+    const shelfName = books.find((book) => book.id === id)?.shelf;
+    return shelfName ?? "none";
   };
 
   const bookStatusOptions = (shelf) => {
@@ -43,13 +44,41 @@ function App() {
     ];
   };
 
-  const updateBookShelf = (bookId, shelf) => {
+  const addBook = (book) => {
+    console.log(`addBook: Hi`);
+    setBooks([...books, book]);
+  };
+
+  const removeBook = (book) => {
+    console.log(`removeBook: Hi`);
+    const filteredBooks = books.filter((b) => b.id !== book.id);
+    console.log(filteredBooks);
+    setBooks(filteredBooks);
+  };
+
+  const updateBook = (bookToUpdate) => {
     const updatedBooks = books.map((book) => {
-      const newShelf = bookId === book.id ? shelf : book.shelf;
-      return { ...book, shelf: newShelf };
+      return book.id === bookToUpdate.id ? bookToUpdate : book;
     });
     setBooks(updatedBooks);
   };
+
+  const onShelfChange = (book, newShelf) => {
+    // assumes book.shelf !== newShelf since it should
+    // be called only when the book shelf value changes.
+    if (book.shelf === "none") {
+      addBook({ ...book, shelf: newShelf });
+    } else {
+      if (newShelf === "none") {
+        // changing to none means removing this book.
+        removeBook(book);
+      } else {
+        const bookToUpdate = { ...book, shelf: newShelf };
+        updateBook(bookToUpdate);
+      }
+    }
+  };
+
   const shelfNames = ["currentlyReading", "wantToRead", "read"];
   const mapBooks = (books) => {
     return books.map((book) => {
@@ -100,7 +129,7 @@ function App() {
             setBooks={setBooks}
             shelfNames={shelfNames}
             bookStatusOptions={bookStatusOptions}
-            onUpdateBookShelf={updateBookShelf}
+            onShelfChange={onShelfChange}
           />
         }
       />
@@ -110,7 +139,8 @@ function App() {
           <SearchPage
             books={books}
             bookStatusOptions={bookStatusOptions}
-            onUpdateBookShelf={updateBookShelf}
+            getShelf={getShelf}
+            onShelfChange={onShelfChange}
           />
         }
       />
